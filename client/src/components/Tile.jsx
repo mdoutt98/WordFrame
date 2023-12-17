@@ -1,23 +1,23 @@
 import React from 'react';
-import { useDrag } from 'react-dnd';
+import styled from 'styled-components';
 
-const Tile = ({ letter }) => {
-    const [{ isDragging }, drag] = useDrag(() => ({
-        type: 'letter',
-        item: { letter },
-        collect: monitor => ({
-            isDragging: !!monitor.isDragging(),
-        }),
-    }));
-
+const TileWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  border: 1px solid #000;
+  font-size: 24px; /* Adjust font size as needed */
+  font-weight: bold; /* This will make the font weight bold */
+  background-color: ${props => props.letter ? '#FBAB7E' : '#FFFFFF'};
+  background-image: ${props => props.letter ? 'linear-gradient(62deg, #FBAB7E 0%, #F7CE68 100%)' : 'none'};
+  border-radius: ${props => props.isInner ? '8px' : '0'};
+`;
+const Tile = ({ letter, isOuter, isInner }) => {
     return (
-        <div
-            ref={drag}
-            className={`p-4 border rounded-lg text-center cursor-pointer ${isDragging ? 'bg-green-300' : 'bg-blue-300'}`}
-            style={{ opacity: isDragging ? 0.5 : 1 }}
-        >
+        <TileWrapper letter={letter} isOuter={isOuter} isInner={isInner}>
             {letter}
-        </div>
+        </TileWrapper>
     );
 };
 

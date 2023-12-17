@@ -2,47 +2,62 @@
 const express = require('express');
 const router = express.Router();
 
-// Example words for the game
-const words = ['APPLE', 'EARLY', 'SUNNY', 'ATOMS'];
+// Array of word sets
+const wordSets = [
+    ['APPLE', 'EARLY', 'SUNNY', 'ATOMS'],
+    ['MAJOR', 'ROUTE', 'CRUDE', 'MAGIC'],
+    ['WIDTH', 'HOPED', 'GRAND', 'WRONG'],
+    ['GLOVE', 'EMPTY', 'FUNNY', 'GRIEF'],
+    ['SHELL', 'LIVER', 'RULER', 'SUGAR'],
+    ['SHIRT', 'THICK', 'WRECK', 'SCREW'],
+    ['SOUND', 'DEATH', 'FRESH', 'SHELF'],
+    ['COVER', 'RATIO', 'RADIO', 'CLEAR'],
+    ['SCOPE', 'ENTER', 'FLOUR', 'STAFF'],
+    ['HAPPY', 'YOUNG', 'AMONG', 'HYENA'],
+    ['STIFF', 'FORCE', 'TRADE', 'SIGHT'],
+    ['PLAIN', 'NIGHT', 'FLINT', 'PROOF'],
+    ['OPIUM', 'MODEL', 'RIVAL', 'OFFER']
+];
 
-// Function to create letter tiles (16 letters)
+// Function to select a random word set
+function getRandomWordSet() {
+    const randomIndex = Math.floor(Math.random() * wordSets.length);
+    return wordSets[randomIndex];
+}
+
+// Function to create letter tiles (12 middle letters) and corner tiles (4 unique edge letters)
 function createLetterTiles(words) {
     if (words.length !== 4 || !words.every(word => word.length === 5)) {
         throw new Error("Invalid input: Expected four five-letter words");
     }
 
     // Extract and reduce the first and last letters to unique characters
-    let edgeLetters = new Set();
+    let cornerTiles = new Set();
     words.forEach(word => {
-        edgeLetters.add(word.charAt(0));
-        edgeLetters.add(word.charAt(word.length - 1));
+        cornerTiles.add(word.charAt(0));
+        cornerTiles.add(word.charAt(word.length - 1));
     });
-
-    // Convert the edgeLetters set to an array
-    const uniqueEdgeLetters = Array.from(edgeLetters);
 
     // Extract the middle three letters of each word
     let middleLetters = words.map(word => word.substring(1, word.length - 1)).join('');
 
-    // Combine the two sets of letters
-    let combinedLetters = middleLetters + uniqueEdgeLetters.join('');
-
-    // Shuffle the combined letters
-    combinedLetters = combinedLetters.split('');
-    for (let i = combinedLetters.length - 1; i > 0; i--) {
+    // Shuffle the middle letters
+    middleLetters = middleLetters.split('');
+    for (let i = middleLetters.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
-        [combinedLetters[i], combinedLetters[j]] = [combinedLetters[j], combinedLetters[i]];
+        [middleLetters[i], middleLetters[j]] = [middleLetters[j], middleLetters[i]];
     }
 
-    // Return the shuffled letters and the unique edge letters
-    return { letterTiles: combinedLetters.join(''), uniqueEdgeLetters };
+    // Return the shuffled middle letters and the unique corner tiles
+    return { letterTiles: middleLetters.join(''), cornerTiles: Array.from(cornerTiles) };
 }
 
-// Route for getting daily words, letter tiles, and unique edge letters
+// Route for getting daily words, letter tiles, and corner tiles
 router.get('/daily-words', (req, res) => {
     try {
-        const { letterTiles, uniqueEdgeLetters } = createLetterTiles(words);
-        res.json({ words, letterTiles, uniqueEdgeLetters });
+        const words = getRandomWordSet();
+        const { letterTiles, cornerTiles } = createLetterTiles(words);
+        res.json({ words, letterTiles, cornerTiles });
     } catch (error) {
         res.status(500).send(error.message);
     }
