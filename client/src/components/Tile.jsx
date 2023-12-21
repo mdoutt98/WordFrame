@@ -11,14 +11,24 @@ const TileWrapper = styled.div`
   font-size: 24px; /* Adjust font size as needed */
   font-weight: bold; /* This will make the font weight bold */
   background:linear-gradient(62deg, #FBAB7E 0%, #F7CE68 100%);
+  background-color: ${({ $isBlank }) => $isBlank ? 'white' : '#FBAB7E'};
+  opacity: ${({ $isBlank }) => $isBlank ? 0.5 : 1}; // Lower opacity for blank tiles
   cursor: pointer;
   //color: ${({ $isCorrect }) => $isCorrect === null ? '#000' : $isCorrect ? 'green' : 'red'};
   
 `;
 
 const Tile = ({ tile, index, onSelectTile }) => {
+    const isBlank = tile.letter === null;
+
     return (
-        <TileWrapper onClick={() => onSelectTile(tile, index)} $isCorrect={tile.isCorrect}>
+        <TileWrapper
+            onClick={() => onSelectTile(tile, index)}
+            $isBlank={isBlank}
+            style={{
+                cursor: tile.movable ? 'pointer' : 'default'
+            }}
+        >
             {tile.letter}
         </TileWrapper>
     );

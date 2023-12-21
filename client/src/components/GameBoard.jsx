@@ -21,8 +21,13 @@ const GameBoard = ({ tiles }) => {
 
 // Initialize the grid with tiles
     useEffect(() => {
-            // Initialize a blank grid
-            const initialGrid = Array(25).fill(null);
+        // Initialize a blank grid with moveable blank tiles instead of null
+        const initialGrid = Array(25).fill(null).map((_, index) => {
+            return {
+                letter: null,
+                movable: true
+            };
+        });
 
         // Place corner tiles
         initialGrid[0] = corners[0]; // top-left
