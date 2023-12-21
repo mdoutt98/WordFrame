@@ -1,3 +1,4 @@
+// Tile.jsx
 import React from 'react';
 import styled from 'styled-components';
 
@@ -6,17 +7,19 @@ const TileWrapper = styled.div`
   align-items: center;
   justify-content: center;
   height: 100%;
-  border: 1px solid #000;
+  border: 1px solid black;
   font-size: 24px; /* Adjust font size as needed */
   font-weight: bold; /* This will make the font weight bold */
-  background-color: ${props => props.letter ? '#FBAB7E' : '#FFFFFF'};
-  background-image: ${props => props.letter ? 'linear-gradient(62deg, #FBAB7E 0%, #F7CE68 100%)' : 'none'};
-  border-radius: ${props => props.isInner ? '8px' : '0'};
+  background:linear-gradient(62deg, #FBAB7E 0%, #F7CE68 100%);
+  cursor: pointer;
+  //color: ${({ $isCorrect }) => $isCorrect === null ? '#000' : $isCorrect ? 'green' : 'red'};
+  
 `;
-const Tile = ({ letter, isOuter, isInner }) => {
+
+const Tile = ({ tile, index, onSelectTile }) => {
     return (
-        <TileWrapper letter={letter} isOuter={isOuter} isInner={isInner}>
-            {letter}
+        <TileWrapper onClick={() => onSelectTile(tile, index)} $isCorrect={tile.isCorrect}>
+            {tile.letter}
         </TileWrapper>
     );
 };

@@ -1,6 +1,8 @@
+//Game.jsx
 import React, { useEffect, useState } from 'react';
 import GameBoard from './GameBoard';
 import styled from 'styled-components';
+
 
 // Define breakpoints for different screen sizes, e.g., mobile devices
 const mobileBreakpoint = '768px'; // typically the width for mobile devices
@@ -33,29 +35,68 @@ const GameWrapper = styled.div`
 `;
 
 const Game = () => {
-    const [tiles, setTiles] = useState({ letters: [], corners: [] });
+    const [tiles, setTiles] = useState({ letters: [], corners: [], revealed: [], answerGrid: [] });
 
     useEffect(() => {
         fetch('/api/daily-words')
             .then(response => response.json())
             .then(data => {
-                // Assuming data has exactly 9 letterTiles and 4 cornerTiles
-                setTiles({
-                    letters: data.letterTiles.split(''), // 9 middle letters
-                    corners: data.cornerTiles // 4 corner letters
-                });
+                // Initialize the grid with tile objects
+                const letterTiles = data.letterTiles.split('').map((letter, index) => ({
+                    id: index,
+                    letter: letter,
+                    position: calculatePosition(index), // Function to calculate the tile's position
+                    movable: true // Initially, all center tiles are movable
+                }));
+
+                const cornerTiles = data.cornerTiles.map((letter, index) => ({
+                    id: 9 + index, // Assuming there are 9 letter tiles
+                    letter: letter,
+                    position: cornerPosition(index), // Function to determine corner positions
+                    movable: false // Corner tiles are not movable
+                }));
+
+                // Process revealed letters
+                const revealedTiles = data.revealedLetters.map((letter, index) => ({
+                    letter: letter,
+                    position: data.revealedLetterPositions[index], // Assuming this is an array of positions
+                    movable: false
+                }));
+
+
+                setTiles(prevState => ({
+                    ...prevState,
+                    revealed: revealedTiles,
+                    answerGrid: data.answerArray,
+                    letters: letterTiles,
+                    corners: cornerTiles
+                }));
             })
             .catch(error => {
                 console.error('Error fetching daily words:', error);
             });
     }, []);
 
+    // Helper function to calculate positions for center tiles
+    function calculatePosition(index) {
+        // Logic to calculate the position based on index for a 3x3 center grid
+        const x = (index % 3) + 1; // Offset by 1 to place in center of 5x5 grid
+        const y = Math.floor(index / 3) + 1; // Offset by 1 for the same reason
+        return { x, y };
+    }
+
+    // Helper function to determine corner positions
+    function cornerPosition(index) {
+        // Define positions for the four corners
+        const positions = [{x: 0, y: 0}, {x: 4, y: 0}, {x: 0, y: 4}, {x: 4, y: 4}];
+        return positions[index];
+    }
+
     return (
-        <GameWrapper>
-            <GameBoard tiles={tiles} />
-        </GameWrapper>
+            <GameWrapper>
+                <GameBoard tiles={tiles} answerArray={tiles.answerGrid}/>
+            </GameWrapper>
     );
 };
 
 export default Game;
-
