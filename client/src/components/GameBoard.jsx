@@ -10,6 +10,25 @@ const Board = styled.div`
   width: 100%;
   height: 100%;
   background-color: ghostwhite;
+  margin-bottom: 50px;
+`;
+
+const SolveButton = styled.button`
+  padding: 6px 12px; // Add some padding for better button sizing
+  font-size: 1.6em; // Adjust font size as needed
+  cursor: pointer; // Change cursor to indicate it's clickable
+  border: none; // Remove default border
+  border-radius: 5px; // Optionally round the corners
+  background: linear-gradient(62deg, #FBAB7E 0%, #F7CE68 100%);
+  color: white; // Adjust text color for better readability
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3); // Add a subtle shadow for depth
+  transition: transform 0.1s ease; // Smooth transform on click
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  
+  &:active {
+    transform: translateY(2px); // Move the button down slightly when clicked
+    
+  }
 `;
 
 
@@ -111,6 +130,7 @@ const GameBoard = ({ tiles }) => {
 
 
     return (
+        <>
         <Board>
             {grid.map((tile, index) => (
                 <div key={index}>
@@ -118,6 +138,8 @@ const GameBoard = ({ tiles }) => {
                 </div>
             ))}
         </Board>
+    <SolveButton onClick={() => checkWinCondition(grid)}>Solve</SolveButton>
+            </>
     );
 };
 

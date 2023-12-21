@@ -15,7 +15,9 @@ const GameWrapper = styled.div`
   max-height: 300px; // maximum size of the game
   border: 1px solid black; // style the border as needed
   margin-top: 10vw;
-
+  
+  
+  
   @media (max-width: ${mobileBreakpoint}) {
     margin-top: 5vw; // Adjust top margin for mobile devices
     width: 80vw; // Increase the size for mobile devices

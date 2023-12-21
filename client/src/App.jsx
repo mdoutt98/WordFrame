@@ -26,7 +26,8 @@ const TimerContainer = styled.div`
     font-size: 1.7em;
     margin-top: 2vh;
   @media (orientation: portrait) {
-    margin-top: 10vh;
+    margin-top: 6vh;
+    font-size: 2.2em;
       }
     \`;
     
