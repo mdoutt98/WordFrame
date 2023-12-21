@@ -14,7 +14,7 @@ const Board = styled.div`
 `;
 
 const SolveButton = styled.button`
-  padding: 6px 12px; // Add some padding for better button sizing
+  padding: 6px 20px; // Add some padding for better button sizing
   font-size: 1.6em; // Adjust font size as needed
   cursor: pointer; // Change cursor to indicate it's clickable
   border: none; // Remove default border
@@ -24,15 +24,20 @@ const SolveButton = styled.button`
   box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3); // Add a subtle shadow for depth
   transition: transform 0.1s ease; // Smooth transform on click
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  position: absolute;
+  bottom: -100px; // Adjust as needed to move the button below the board
+  left: 33%;
+  //transform: translateX(-50%);
   
   &:active {
-    transform: translateY(2px); // Move the button down slightly when clicked
+    transform: translateY(3px); // Move the button down slightly when clicked
     
   }
 `;
 
 
-const GameBoard = ({ tiles }) => {
+
+const GameBoard = ({ tiles, answerArray }) => {
     const { letters, corners, revealed } = tiles;
     const [grid, setGrid] = React.useState(Array(25).fill(null));
     const [selectedTile, setSelectedTile] = useState(null);
@@ -139,7 +144,7 @@ const GameBoard = ({ tiles }) => {
             ))}
         </Board>
     <SolveButton onClick={() => checkWinCondition(grid)}>Solve</SolveButton>
-            </>
+    </>
     );
 };
 
