@@ -112,27 +112,49 @@ const GameBoard = ({ tiles, answerArray }) => {
     };
 
     const checkWinCondition = (grid) => {
-        const isWin = grid.every((tile, index) => {
-            if (!tile || !tile.letter) return true;
+        let isWin = true;
 
+        // Check the first and last rows
+        for (let col = 0; col < 5; col++) {
+            if (grid[0 * 5 + col].letter !== answerArray[0][col] ||
+                grid[4 * 5 + col].letter !== answerArray[4][col]) {
+                isWin = false;
+                break;
+            }
+        }
+
+        // If the first and last rows are correct, check the first and last columns
+        if (isWin) {
+            for (let row = 1; row < 4; row++) {
+                if (grid[row * 5].letter !== answerArray[row][0] ||
+                    grid[row * 5 + 4].letter !== answerArray[row][4]) {
+                    isWin = false;
+                    break;
+                }
+            }
+        }
+
+        // Update the grid with the correct/incorrect status for outermost tiles
+        const newGrid = grid.map((tile, index) => {
             const row = Math.floor(index / 5);
             const col = index % 5;
-
-            // Check only outermost tiles
+            // For outermost tiles, update the isCorrect status
             if (row === 0 || row === 4 || col === 0 || col === 4) {
-                const isCorrect = tile.letter === answerArray[row][col];
-                tile.isCorrect = isCorrect;
-                return isCorrect;
+                const expectedLetter = answerArray[row][col];
+                const isCorrect = tile.letter === expectedLetter;
+                return { ...tile, isCorrect }; // Clone the tile object with updated isCorrect property
             }
-
-            return true;
+            return tile; // Inner tiles remain the same
         });
+
+        setGrid(newGrid); // Update the state with the new grid
 
         if (isWin) {
             alert('Congrats, you won!');
+        } else {
+            // If not a winning condition, indicate the incorrect tiles somehow, e.g. alert or state update
         }
     };
-
 
     return (
         <>
