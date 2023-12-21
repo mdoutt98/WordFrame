@@ -17,7 +17,7 @@ const GameBoard = ({ tiles }) => {
     const { letters, corners, revealed } = tiles;
     const [grid, setGrid] = React.useState(Array(25).fill(null));
     const [selectedTile, setSelectedTile] = useState(null);
-
+    const [selectedTileIndex, setSelectedTileIndex] = useState(null);
 
 // Initialize the grid with tiles
     useEffect(() => {
@@ -63,6 +63,7 @@ const GameBoard = ({ tiles }) => {
             moveTile(index);
         } else {
             setSelectedTile({ tile, index });
+            setSelectedTileIndex(index);
         }
     };
 
@@ -84,7 +85,6 @@ const GameBoard = ({ tiles }) => {
         // Update the grid and check for winning condition
         setGrid(newGrid);
 
-        //checkWinCondition(newGrid);
     };
 
     const checkWinCondition = (grid) => {
@@ -114,7 +114,7 @@ const GameBoard = ({ tiles }) => {
         <Board>
             {grid.map((tile, index) => (
                 <div key={index}>
-                    {tile ? <Tile tile={tile} index={index} onSelectTile={onSelectTile} /> : <div />}
+                    {tile ? <Tile tile={tile} index={index} onSelectTile={onSelectTile} isSelected={selectedTileIndex === index} /> : <div />}
                 </div>
             ))}
         </Board>
