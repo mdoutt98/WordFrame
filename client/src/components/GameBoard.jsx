@@ -2,6 +2,7 @@
 import React, { useEffect, useState} from 'react';
 import Tile from './Tile'; // Import your Tile component
 import styled from 'styled-components';
+import Modal from './Modal';
 
 const Board = styled.div`
   display: grid;
@@ -42,6 +43,7 @@ const GameBoard = ({ tiles, answerArray }) => {
     const [grid, setGrid] = React.useState(Array(25).fill(null));
     const [selectedTile, setSelectedTile] = useState(null);
     const [selectedTileIndex, setSelectedTileIndex] = useState(null);
+    const [isWinner, setIsWinner] = useState(false);
 
 // Initialize the grid with tiles
     useEffect(() => {
@@ -150,10 +152,14 @@ const GameBoard = ({ tiles, answerArray }) => {
         setGrid(newGrid); // Update the state with the new grid
 
         if (isWin) {
-            alert('Congrats, you won!');
+            setIsWinner(isWin);
         } else {
             // If not a winning condition, indicate the incorrect tiles somehow, e.g. alert or state update
         }
+    };
+
+    const restartGame = () => {
+        window.location.reload(); // Reload the page to restart the game
     };
 
     return (
@@ -165,6 +171,7 @@ const GameBoard = ({ tiles, answerArray }) => {
                 </div>
             ))}
         </Board>
+            {isWinner && <Modal onRestart={restartGame} />}
     <SolveButton onClick={() => checkWinCondition(grid)}>Solve</SolveButton>
     </>
     );

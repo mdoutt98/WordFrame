@@ -1,9 +1,28 @@
-// Timer.jsx
 import React, { useState, useEffect } from 'react';
 
-const Timer = () => {
+const Timer = ({ isRunning, onTimeUp }) => {
     const initialTime = 120; // Set initial time to 120 seconds (2 minutes)
     const [time, setTime] = useState(initialTime);
+
+    useEffect(() => {
+        let timer;
+        if (isRunning && time > 0) {
+            timer = setInterval(() => {
+                setTime((t) => {
+                    if (t === 1) { // If time is about to reach zero
+                        onTimeUp(); // Call the onTimeUp function
+                    }
+                    return t - 1;
+                });
+            }, 1000);
+        }
+
+        return () => {
+            if (timer) clearInterval(timer);
+        };
+    }, [isRunning, time, onTimeUp]);
+
+
 
     // Function to format the time as "mm:ss"
     const formatTime = (seconds) => {
@@ -11,20 +30,6 @@ const Timer = () => {
         const remainingSeconds = seconds % 60;
         return `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
     };
-
-    useEffect(() => {
-        // Timer logic to decrease time by 1 second every second
-        const timer = time > 0 ? setInterval(() => {
-            setTime((prevTime) => prevTime - 1);
-        }, 1000) : null;
-
-        // Clear interval on component unmount or when time reaches 0
-        return () => {
-            if (timer) {
-                clearInterval(timer);
-            }
-        };
-    }, [time]);
 
     return (
         <div>

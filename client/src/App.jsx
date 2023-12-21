@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Timer from './components/Timer';
 import Game from './components/Game';
-import { DndProvider } from 'react-dnd';
-import { TouchBackend } from 'react-dnd-touch-backend';
+import StartScreen from './components/StartScreen';
+import OutOfTimeModal from './components/OutOfTimeModal';
 
 const mobileBreakpoint = '768px';
 
@@ -46,16 +46,37 @@ const GameContainer = styled.div`
 `;
 
 function App() {
+    const [gameStarted, setGameStarted] = useState(false);
+    const [showOutOfTimeModal, setShowOutOfTimeModal] = useState(false);
+    const startGame = () => {
+        setGameStarted(true); // This will hide the start screen and start the game
+    };
+
+    // Function to handle time-up event
+    const handleTimeUp = () => {
+        setShowOutOfTimeModal(true);
+        setGameStarted(false); // Stop the game
+    };
+
+    const tryAgain = () => {
+        setShowOutOfTimeModal(false);
+        setGameStarted(false); // Reset the game state, ready to start again
+    };
+
     return (
         <AppContainer>
-            <DndProvider backend={TouchBackend} options={{ enableMouseEvents: true }}> {/* Wrap with DndProvider */}
+            {!gameStarted && !showOutOfTimeModal && <StartScreen onStart={startGame} />}
+            {gameStarted && (
+                <>
             <TimerContainer>
-                <Timer /> {/* Only include this if you still have the Timer component */}
+                <Timer isRunning={gameStarted} onTimeUp={handleTimeUp} />
             </TimerContainer>
             <GameContainer>
-                <Game /> {/* Only include this if you still have the Game component */}
+                <Game />
             </GameContainer>
-            </DndProvider>
+        </>
+    )}
+            {showOutOfTimeModal && <OutOfTimeModal onTryAgain={tryAgain} />}
         </AppContainer>
     );
 }
