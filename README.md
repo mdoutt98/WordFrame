@@ -2,10 +2,10 @@
 
 <img src="https://github.com/mdoutt98/WordFrame/assets/101009895/8ba73410-1aad-41b2-892a-2332c15786f7" width="20%">
 
-WordFrame is a captivating and challenging web-based word puzzle game. It offers a unique daily word-guessing experience where players interact with a grid of scrambled letters to form words. The game resets daily with a fresh set of words, providing a consistent challenge to its users.
+WordFrame is a captivating and challenging web-based word puzzle game. It offers a unique word-guessing experience where players interact with a grid of scrambled letters to form words.
 
 ## Game Description
-In WordFrame, players are presented with a 4x4 grid filled with scrambled letters. Each day, four new words are chosen and their letters are randomly distributed across the grid. The player's task is to reorganize these letters to form the correct words.
+In WordFrame, players are presented with a 5x5 grid filled with scrambled letters. Each day, four new words are chosen and their letters are randomly distributed across the grid. The player's task is to reorganize these letters to form the correct words.
 
 The game's interface includes draggable tiles and slots where these tiles can be placed. When a player drags a letter onto a slot, it grows to fill the slot, visually assisting in word formation. The words are formed around the edges of the grid, with each side representing one word. Adjacent sides share a common letter, adding an extra layer of complexity and fun to the puzzle.
 
