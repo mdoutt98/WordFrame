@@ -17,6 +17,7 @@ When a correct word is guessed, the font color of the tiles changes to teal, pro
   <img src="https://img.shields.io/badge/-Vite-B73BFE?style=flat&logo=Vite&logoColor=ffffff" alt="Vite" />
   <img src="https://img.shields.io/badge/-CSS3-1572B6?style=flat&logo=CSS3&logoColor=ffffff" alt="CSS3" />
   <img src="https://img.shields.io/badge/-JavaScript-323330?style=flat&logo=JavaScript&logoColor=F7DF1E" alt="JavaScript" />
+  <img src="https://img.shields.io/badge/-Express.js-000000?style=flat&logo=Express&logoColor=ffffff" alt="Express.js" />
 </p>
 
 ```mermaid 
