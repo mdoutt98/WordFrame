@@ -40,7 +40,7 @@ const Game = () => {
     const [tiles, setTiles] = useState({ letters: [], corners: [], revealed: [], answerGrid: [] });
 
     useEffect(() => {
-        fetch('/api/daily-words')
+        fetch('http://wfbe.mattdoutt.com/api/daily-words')
             .then(response => response.json())
             .then(data => {
                 // Initialize the grid with tile objects
@@ -71,7 +71,8 @@ const Game = () => {
                     revealed: revealedTiles,
                     answerGrid: data.answerArray,
                     letters: letterTiles,
-                    corners: cornerTiles
+                    corners: cornerTiles,
+                    words:data.words
                 }));
             })
             .catch(error => {
@@ -96,7 +97,7 @@ const Game = () => {
 
     return (
             <GameWrapper>
-                <GameBoard tiles={tiles} answerArray={tiles.answerGrid}/>
+                <GameBoard tiles={tiles} answerArray={tiles.answerGrid} words={tiles.words}/>
             </GameWrapper>
     );
 };

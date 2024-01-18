@@ -24,6 +24,14 @@ const StartContent = styled.div`
   font-size: 1.7em;
   font-weight: bold;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    
+    p {
+        font-weight: 400;
+    }
+    
+    h2 {
+        font-size: 1.7em;
+    }
 `;
 
 const StartButton = styled.button`
@@ -43,9 +51,12 @@ const StartScreen = ({ onStart }) => {
     return (
         <StartOverlay>
             <StartContent>
-
-                <p>You have 2 minutes to unscramble the four words and solve the WordFrame.</p>
-                <StartButton onClick={onStart}>Start!</StartButton>
+                <h2> WordFrame</h2>
+                <p>The game board consists of a 5x5 grid with nine movable letter tiles in the center.
+                    Four corner tiles and three randomly selected tiles are revealed in their correct position.
+                    Swap the movable letter tiles by clicking on each of them.
+                    Unscramble the four words in the outermost squares within two minutes to solve the WordFrame!</p>
+                <StartButton onClick={onStart}>Start</StartButton>
             </StartContent>
         </StartOverlay>
     );

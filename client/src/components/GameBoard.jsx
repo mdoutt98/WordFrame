@@ -26,19 +26,25 @@ const SolveButton = styled.button`
   transition: transform 0.1s ease; // Smooth transform on click
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
   position: absolute;
-  bottom: -100px; // Adjust as needed to move the button below the board
-  left: 33%;
+  bottom: -80px; // Adjust as needed to move the button below the board
+  left: 35%;
   //transform: translateX(-50%);
   
   &:active {
     transform: translateY(3px); // Move the button down slightly when clicked
-    
   }
 `;
 
+const RevealButton = styled(SolveButton)`
+left: 40%;
+bottom: -130px;
+padding: 3px 10px; // Add some padding for better button sizing
+font-size: 1em;
+color: white;
+`;
 
 
-const GameBoard = ({ tiles, answerArray }) => {
+const GameBoard = ({ tiles, answerArray, words }) => {
     const { letters, corners, revealed } = tiles;
     const [grid, setGrid] = React.useState(Array(25).fill(null));
     const [selectedTile, setSelectedTile] = useState(null);
@@ -162,6 +168,10 @@ const GameBoard = ({ tiles, answerArray }) => {
         window.location.reload(); // Reload the page to restart the game
     };
 
+    const revealAnswer = () => {
+        alert('Words: ' + words.join(', ')); // Display the answer array in an alert
+    };
+
     return (
         <>
         <Board>
@@ -173,7 +183,8 @@ const GameBoard = ({ tiles, answerArray }) => {
         </Board>
             {isWinner && <Modal onRestart={restartGame} />}
     <SolveButton onClick={() => checkWinCondition(grid)}>Solve</SolveButton>
-    </>
+    <RevealButton onClick={revealAnswer}>Reveal</RevealButton>
+        </>
     );
 };
 
