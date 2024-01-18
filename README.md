@@ -39,7 +39,7 @@ graph TD;
 To run WordFrame on your local machine, follow these steps:
 1. Clone the Repository: Clone the WordFrame repository to your local machine.
 2. Install Dependencies: Navigate to the project directory and run npm install to install the necessary dependencies.
-3. Start the Application: Run npm run dev to start the application. It will be available at http://localhost:3000.
+3. Start the Application: Run npm run dev to start the application. It will be available at http://localhost:5000.
 
 ### Contributing
 Contributions to WordFrame are always welcome, whether it be improvements to the codebase, bug reports, or new feature suggestions. If you wish to contribute, please follow these steps:
