@@ -21,13 +21,18 @@ When a correct word is guessed, the font color of the tiles changes to teal, pro
 
 ```mermaid 
 graph TD;
-    A[WordFrame App] --> B[Grid Component]
-    A --> C[Game Logic]
+    A[WordFrame App] --> B[Front End Client]
+    A --> C[Express Server]
     B --> D[Tile Component]
     B --> E[Slot Component]
-    C --> F[Word Scrambling]
-    C --> G[Correct Guess Checking]
+    B --> F[Gameboard Component]
+    B --> G[Game Component]
+    C --> H[gameRoutes]
 ```
+
+
+
+
 
 # Setup and Installation
 To run WordFrame on your local machine, follow these steps:
