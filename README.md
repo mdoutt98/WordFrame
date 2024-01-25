@@ -2,14 +2,16 @@
 
 <img src="https://github.com/mdoutt98/WordFrame/assets/101009895/8ba73410-1aad-41b2-892a-2332c15786f7" width="20%">
 
-WordFrame is a captivating and challenging web-based word puzzle game. It offers a unique word-guessing experience where players interact with a grid of scrambled letters to form words.
+WordFrame is a web-based word puzzle game. It offers a unique word-guessing experience where players interact with a grid of scrambled letters to form words. WordFrame has over 600+ solution sets for improved replay value.
 
 ## Game Description
-In WordFrame, players are presented with a 5x5 grid filled with scrambled letters. Each day, four new words are chosen and their letters are randomly distributed across the grid. The player's task is to reorganize these letters to form the correct words.
+The game board consists of a 5x5 grid with nine movable letter tiles in the center. Four corner tiles and three randomly selected tiles are revealed in their correct position. Swap the movable letter tiles by clicking on a pair of them. Unscramble the four words in the outermost slots within **two minutes** to solve the **WordFrame**!
+A reveal button was added to assist players with solving puzzles.
 
-The game's interface includes draggable tiles and slots where these tiles can be placed. When a player drags a letter onto a slot, it grows to fill the slot, visually assisting in word formation. The words are formed around the edges of the grid, with each side representing one word. Adjacent sides share a common letter, adding an extra layer of complexity and fun to the puzzle.
-
-When a correct word is guessed, the font color of the tiles changes to teal, providing immediate feedback on the player's progress.
+## Software 
+The React Client uses an api call to the Express Server to retrieve a random four word solution set (words, letter tiles, corner tiles, answer array).
+The api call occurs when the 'Start' or 'Play Again' buttons are pressed on one of the modal pop-ups.
+The retrieved data is used to position the 9 moveable tiles in the center of the gameboard, the four fixed corner tiles, and three randomly revealed tiles.
 
 ## Technologies Used
 <p>
