@@ -1,6 +1,5 @@
 # WordFrame
-
-<img src="https://github.com/mdoutt98/WordFrame/assets/101009895/8ba73410-1aad-41b2-892a-2332c15786f7" width="20%">
+<img src="WordFrame2.png" width="128" height="164.8">
 
 WordFrame is a web-based word puzzle game. It offers a unique word-guessing experience where players interact with a grid of scrambled letters to form words. WordFrame has over 600+ solution sets for improved replay value.
 
