@@ -1,6 +1,8 @@
 # WordFrame
+<div>
 <img src="WordFrame2.png" width="128" height="164.8">
-
+<img src="WordFrame3.png" width="128" height="164.8">
+</div>
 WordFrame is a web-based word puzzle game. It offers a unique word-guessing experience where players interact with a grid of scrambled letters to form words. WordFrame has over 600+ solution sets for improved replay value.
 
 ## Game Description
