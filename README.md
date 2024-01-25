@@ -1,13 +1,11 @@
 # WordFrame
-<div>
-<img src="WordFrame2.png" width="128" height="164.8">
-<img src="WordFrame3.png" width="128" height="164.8">
-</div>
+<img src="Logo.png" width="20%">
 WordFrame is a web-based word puzzle game. It offers a unique word-guessing experience where players interact with a grid of scrambled letters to form words. WordFrame has over 600+ solution sets for improved replay value.
 
 ## Game Description
 The game board consists of a 5x5 grid with nine movable letter tiles in the center. Four corner tiles and three randomly selected tiles are revealed in their correct position. Swap the movable letter tiles by clicking on a pair of them. Unscramble the four words in the outermost slots within **two minutes** to solve the **WordFrame**!
 A reveal button was added to assist players with solving puzzles.
+
 
 ## Software 
 The React Client uses an api call to the Express Server to retrieve a random four word solution set (words, letter tiles, corner tiles, answer array).
@@ -34,6 +32,11 @@ graph TD;
     C --> H[gameRoutes]
 ```
 
+## Screenshots
+<div>
+<img src="WordFrame2.png" width="128" height="164.8">
+<img src="WordFrame3.png" width="128" height="164.8">
+</div>
 
 
 
